@@ -1,0 +1,6 @@
+name: env_preparacao_ambiente
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python
