@@ -6,7 +6,7 @@ def sub(num1, num2):
     sub = int(num1) - int(num2)
     print(sub) 
 
-def cores():
+def _cores(): #underline protege a função
     pass
 
 def main():
@@ -15,5 +15,5 @@ def main():
     sum(num1, num2)
     sub(num1, num2)
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     main()
