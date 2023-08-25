@@ -80,7 +80,7 @@ def conjuntos():
     print("Brasil" in conjunto) #boleano se há o item indicado
     conjunto.add("Venezuela") #adiciona um item
     print(conjunto)
-    novo_conjunto = {"Guiana", "Suriname", "Brasil"}
+    novo_conjunto = {"Guiana", "Suriname", "Brasil", "Guiana Francesa"}
     novo_conjunto.intersection_update(conjunto) #altera o novo_conjunto para o item que tem em comum com conjunto
     print(novo_conjunto)
     inter_conjunto = conjunto.intersection(novo_conjunto) #retorna um conjunto apenas com os elementos iguais dos conjuntos interseccionados
@@ -97,22 +97,52 @@ def conjuntos():
     print(conjunto_copia)
     conjunto_copia.clear() #limpa o conjunto
     print(conjunto_copia)
-    print(conjunto.difference(conjunto_copia)) #retorna os elementos que um set tem diferente do outro
-    
+    print(conjunto)
+    print(conjunto.difference(novo_conjunto)) #retorna os elementos que um set tem diferente do outro
+    print(conjunto.isdisjoint(novo_conjunto)) #retorna um boleano (True se não houver elementos em comum entre os conjuntos)
+    print(conjunto.issubset(novo_conjunto)) #retorna True se o subconjunto estiver dentro do conjunto
+    print(conjunto.issuperset(novo_conjunto)) #retorna True se o conjunto for for um superconjunto de conjunto_copia
+    print(conjunto.symmetric_difference(novo_conjunto)) #retorna os elementos que não estão na intersecção dos conjuntos
+    print(conjunto.symmetric_difference_update(novo_conjunto)) #atualiza o conjunto com os elementos que não fazem parte da intersecção
+    print(conjunto.union(novo_conjunto)) #retorna um conjunto com os elementos unicos dos conjuntos relacionados na união
+    conjunto.update() #adiciona ao conjunto metodos iteraveis (aparentemente apenas um caracter)
+    print(conjunto)
 
+"""
+Dicionarios são caracterizados por {}, alem das {} dicionarios também possua chave e valor
+É possivel adicionar e remover itens
+Os itens são acessados por suas chaves, não tem indice em dicionarios
+"""
 
 def dicionarios():
     dicionario = {
         "pais": "Brasil",
         "continente": "América",
+        "capital": "Brasilia"
     }
     print(dicionario)
     print(type(dicionario))
     print(dicionario["pais"])
     print("pais" in dicionario)
+    dicionario.update() #incrementa o dicionario com um outro dicionario(apenas itens diferentes)
+    print(dicionario.values()) #retorna os valores do dicionario
+    print(dicionario.pop("capital")) #remove e retorna o elemento com a chave fornecida
+    print(dicionario)
+    dicionario.setdefault("capital") #adiciona uma chave ao dicionario: com o valor none
+    print(dicionario)
+    print(dicionario.setdefault("pais")) #retorna o valor da chave no dicionario
+    print(dicionario.popitem()) #remove e retorna o ultimo par adicionado no dicionario
+    print(dicionario.keys()) #retorna as chavesdo dicionario
+    print(dicionario.items()) #retorna os pares de chave e valor do dicionario como elementos de tupla
+    print(dicionario.get("pais")) #retorna o valor da chave especificada
+    #dicionario.fromkeys() #cria um novo dicionário a partir da sequência de elementos fornecidos
+    novo_dicionario = dicionario.copy() #cria uma copia do dicionario, podendo modifica-lo sem modificar o original
+    novo_dicionario.clear() #limpa o dicionario
+    print(novo_dicionario)
+    print(dicionario)
 
 if __name__ == "__main__":
     main()
     #tuplas()
-    conjuntos()
+    #conjuntos()
     #dicionarios()
