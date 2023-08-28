@@ -18,7 +18,7 @@ def url_teste():
         print(link_teste)
 
 def main():
-    #construir_url()
+    construir_url()
     url_teste()
 
 if __name__ == "__main__":
