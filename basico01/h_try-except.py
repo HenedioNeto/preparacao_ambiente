@@ -1,5 +1,5 @@
-#Erros, exceções e tratamentos de erro
-#Quando o erro não se da de forma sintatica ele é chamado de exceção
+# Erros, exceções e tratamentos de erro
+# Quando o erro não se da de forma sintatica ele é chamado de exceção
 """
 n = int(input('num')) no caso acima não há erro sintatico e recebendo um valor de inteiro no input 
 ira rodar tranquilamente, porém, por pedir um inteiro, caso a pessoa coloque uma string ou um
