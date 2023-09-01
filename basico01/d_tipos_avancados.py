@@ -9,6 +9,7 @@ def main():
     #lista(a = "Argentina") #define um dos parametros (a) da função como Argentina 
     
 def lista(a, b = "Brasil"): #define um dos parametros (b) da função como Brasil
+    """Função para estudo de metodo de listas"""
     lista = ["Uruguai", "Paraguai", "Chile"] #criação da lista
     print(lista)
     lista.append(a) #adicionando o parametro (a) a lista
