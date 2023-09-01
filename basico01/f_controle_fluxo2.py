@@ -10,6 +10,7 @@ def construir_url():
         contador = contador - 30
         print(url_completa)
 
+"""Exercicio sobre while"
 def url_teste():
     contador = 0
     while contador <= 90:
