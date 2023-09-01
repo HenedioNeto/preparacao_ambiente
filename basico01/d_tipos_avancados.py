@@ -75,6 +75,7 @@ A ordem dos itens alteram no print()
 """
 
 def conjuntos():
+    """Função para estudo de metodo de conjuntos"""
     conjunto = {"Brasil", "Argentina", "Colombia", "Equador", "Paraguai", "Uruguai", "Peru", "Chile"}
     print(conjunto)
     print(type(conjunto))
