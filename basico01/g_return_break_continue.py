@@ -1,3 +1,7 @@
+#Return finaliza a função e retorna um valor indicado para sua chamada
+#Break é utilizado em loops, quando a condição que chama o break é encontrada o loop encerra
+#Continue é utilizado em loops, quando sua condição é encontrada o loop interrompe a interação atual
+#e continua na próxima iteração
 import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB, Query
