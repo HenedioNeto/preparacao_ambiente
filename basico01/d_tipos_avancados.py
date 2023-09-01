@@ -59,6 +59,7 @@ Não podem ser mutaveis, não é possivel adicionar ou excluir item, nem reorden
 """
 
 def tuplas():
+    """Função para estudo de metodo de tuplas"""
     tupla = ("Paraguai", "Brasil", "Equador", "Colombia", "Argentina", "Brasil")
     print(tupla)
     print(type(tupla)) #tipo da variavel
