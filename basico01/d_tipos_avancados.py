@@ -117,6 +117,7 @@ Os itens são acessados por suas chaves, não tem indice em dicionarios
 """
 
 def dicionarios():
+    """Função para estudo de metodo de dicionarios"""
     dicionario = {
         "pais": "Brasil",
         "continente": "América",
