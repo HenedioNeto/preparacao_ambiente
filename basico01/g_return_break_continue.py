@@ -28,15 +28,16 @@ def construir_url():
         contador = contador - 30
         list_url.append(url_completa)
     return list_url
-print(construir_url())
+#print(construir_url())
 
 def extrair_infos():
-    pass
+    print(construir_url())
 
 def main():
     url = "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa"
     #pagina_web = acessar_pagina(url)
-    construir_url()
+    #construir_url()
+    extrair_infos()
     
 
 if __name__ == "__main__":
