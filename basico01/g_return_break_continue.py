@@ -12,6 +12,11 @@ def acessar_pagina(url):
     #print(bs)
     return bs
 
+#TODO armazenar url em uma lista
+#TODO deixar a lista acessivel para uma função "extrair_infos" (a ser criada)
+#TODO acessar pagina atraves da função "acessar_paginas"
+#TODO printar os nomes de todos os titulos das 3 primeiras paginas das notas de imprensa
+
 def construir_url():
     list_url = []
     links_notas_de_imprensa = "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa?b_start:int="
@@ -23,8 +28,10 @@ def construir_url():
         contador = contador - 30
         list_url.append(url_completa)
     return list_url
-
 print(construir_url())
+
+def extrair_infos():
+    pass
 
 def main():
     url = "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa"

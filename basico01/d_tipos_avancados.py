@@ -11,47 +11,37 @@ def main():
 def lista(a, b = "Brasil"): #define um dos parametros (b) da função como Brasil
     """Função para estudo de metodo de listas"""
     lista = ["Uruguai", "Paraguai", "Chile"] #criação da lista
-    print(lista)
-    lista.append(a) #adicionando o parametro (a) a lista
-    lista.append(b) #adicionando o parametro (b) a lista
-    print(lista)
-    lista.append("Colombia") #adiciona Colombia a lista
-    print(lista)
     print(type(lista)) #retorna o tipo da variavel lista
     print(len(lista)) #retorna o tamanho da lista (quantidades de elementos dentro dela)
+
+    """Metodos de adição e criação de listas"""
+    lista.append(a) #adicionando o parametro (a) a lista
+    lista.append(b) #adicionando o parametro (b) a lista
+    lista.append("Colombia") #adiciona Colombia a lista
+    nova_lista = ["Equador"] #criação de uma segunda variavel em formato lista
+    lista.extend(nova_lista) #adição da nova_lista na lista
+    lista.insert(3, "Guiana") #insere um item na lista (recebe uma posição seguida de virgula e o item)
+    lista[0] = "Paraguai" #altera o item que se encontra no indice indicado pelo item indicado
+
+    """Métodos de busca em listas"""
     print(lista[0]) #retorna o indice 0 (primeiro elemento) da lista
     print(len(lista[0])) #retorna o tamanho do primeiro elemento (quantidade de caracteres)
-    nova_lista = ["Equador"] #criação de uma segunda variavel em formato lista
-    print(nova_lista)
-    lista.extend(nova_lista) #adição da nova_lista na lista
-    print(lista)
-    lista.insert(3, "Guiana") #insere um item na lista (recebe uma posição seguida de virgula e o item)
-    print(lista)
+    print(lista.count("Brasil")) #quantas vezes o item aparece na lista
+    print("Paraguai" in lista) #retorna um boleano sobre a presença do item na lista
+    lista_copia = lista.copy() #copia a lista original
+
+    """Métodos de remoção em listas"""
     lista.remove("Paraguai") #remove o item da lista
-    print(lista)
     lista.pop() #remove o ultimo item da lista
     lista.pop(3) #remove o item pelo indice (no caso [3])
-    print(lista)
     outra_lista = ['Uruguai', 'Paraguai', 'Chile', 'Guiana', 'Argentina', 'Brasil', 'Colombia', 'Equador']
     del outra_lista[4:7] #remove da lista os itens que vão do indice 4 ao 7(-1)
-    print(outra_lista)
     outra_lista.clear() #remove todos os elementos da lista
-    print(outra_lista)
-    lista.append("Brasil")
-    print(lista.count("Brasil")) #quantas vezes o item aparece na lista
-    lista_copia = lista.copy() #copia a lista original
-    print(lista_copia)
+
+    """Métodos de ordenação em listas"""
     lista.sort() #coloca a lista em ordem alfabetica e altera os indices
-    print(lista)
-    print(lista[0])
     print(sorted(lista_copia)) #ordena a lista sem alterar os indices
-    print(lista_copia[0])
     lista.reverse() #inverte a ordem da lista
-    print(lista)
-    print(lista_copia)
-    lista_copia[0] = "Paraguai" #altera o item que se encontra no indice indicado pelo item indicado
-    print(lista_copia)
-    print("Paraguai" in lista_copia) #retorna o boleano se o item for encontrado na lista
 
 """
 Tuplas são caracterizadas por () com um item dentro SEGUIDO POR VIRGULA (,)
