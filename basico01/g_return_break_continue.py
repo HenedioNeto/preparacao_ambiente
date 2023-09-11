@@ -14,7 +14,7 @@ def acessar_pagina(url):
 
 #TODO armazenar url em uma lista
 #TODO deixar a lista acessivel para uma função "extrair_infos" (a ser criada)
-#TODO acessar pagina atraves da função "acessar_paginas"
+#TODO acessar pagina atraves da função "acessar_pagina"
 #TODO printar os nomes de todos os titulos das 3 primeiras paginas das notas de imprensa
 
 def construir_url():
@@ -31,7 +31,25 @@ def construir_url():
 #print(construir_url())
 
 def extrair_infos():
-    print(construir_url())
+    lista_de_links = construir_url()
+    for link_geral in lista_de_links:
+        html = acessar_pagina(link_geral)
+        conteudo = html.find('div', attrs = {'id':'content-core'})
+        lista_nota_imprensa = conteudo.find_all('article')
+        for nota_imprensa in lista_nota_imprensa:
+            titulo = nota_imprensa.h2.text.strip()
+            link = nota_imprensa.a['href']
+            numero = nota_imprensa.span.text
+            lista_data = nota_imprensa.find_all('span', attrs = {'class':'summary-view-icon'})
+            data = lista_data[0].text.strip()
+            horario = lista_data[1].text.strip()
+            print(titulo)
+            print(link)
+            print(numero)
+            print(data)
+            print(horario)
+            print('###')
+        #<div id="content-core">
 
 def main():
     url = "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa"
