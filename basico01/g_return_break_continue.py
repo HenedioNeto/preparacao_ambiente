@@ -12,10 +12,7 @@ def acessar_pagina(url):
     #print(bs)
     return bs
 
-#TODO armazenar url em uma lista
-#TODO deixar a lista acessivel para uma função "extrair_infos" (a ser criada)
-#TODO acessar pagina atraves da função "acessar_pagina"
-#TODO printar os nomes de todos os titulos das 3 primeiras paginas das notas de imprensa
+db = TinyDB('db.json')
 
 def construir_url():
     list_url = []
@@ -38,18 +35,36 @@ def extrair_infos():
         lista_nota_imprensa = conteudo.find_all('article')
         for nota_imprensa in lista_nota_imprensa:
             titulo = nota_imprensa.h2.text.strip()
-            link = nota_imprensa.a['href']
+            link = nota_imprensa.a['href']           
             numero = nota_imprensa.span.text
+            numero = numero.split()
+            numero = numero[4]
             lista_data = nota_imprensa.find_all('span', attrs = {'class':'summary-view-icon'})
             data = lista_data[0].text.strip()
             horario = lista_data[1].text.strip()
-            print(titulo)
-            print(link)
-            print(numero)
-            print(data)
-            print(horario)
-            print('###')
-        #<div id="content-core">
+            teste = acessar_pagina(link)
+            materia = teste.find('div', attrs = {'property':'rnews:articleBody'})
+            lista_paragrafo = materia.find_all('p')
+            lista_texto_paragrafo = []
+            for paragrafo in lista_paragrafo:
+                texto_paragrafo = paragrafo.text
+                lista_texto_paragrafo.append(texto_paragrafo)
+            db.insert({
+                'Titulo da materia': titulo,
+                'Link da materia': link,
+                'Numero da nota de imprensa': numero,
+                'Data da materia': data,
+                'Horario da materia': horario,
+                'Conteudo da materia': lista_texto_paragrafo,
+            })                
+            #print(titulo)
+            #print(link)
+            #print(numero)
+            #print(data)
+            #print(horario)
+            #print(lista_texto_paragrafo)
+            #print('-' * 50)
+
 
 def main():
     url = "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa"
