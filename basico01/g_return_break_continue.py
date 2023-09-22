@@ -10,7 +10,6 @@ import re
 def acessar_pagina(url):
     pagina = requests.get(url)
     bs = BeautifulSoup(pagina.text, "html.parser")
-    #print(bs)
     return bs
 
 def construir_url():
@@ -24,10 +23,9 @@ def construir_url():
         contador = contador - 30
         list_url.append(url_completa)
     return list_url
-#print(construir_url())
 
-def extrair_infos():
-    lista_de_links = construir_url()
+def extrair_infos(lista_urls):
+    lista_de_links = lista_urls
     for link_geral in lista_de_links:
         html = acessar_pagina(link_geral)
         conteudo = html.find('div', attrs = {'id':'content-core'})
@@ -36,9 +34,9 @@ def extrair_infos():
             titulo = nota_imprensa.h2.text.strip()
             link = nota_imprensa.a['href']           
             numero = nota_imprensa.span.text
-            numero = numero.split()
-            numero = numero[4]
-            #numero = re.findall(r'\d+', numero)
+            #numero = numero.split()
+            #numero = numero[4]
+            numero = re.findall(r'\d+', numero)
             lista_data = nota_imprensa.find_all('span', attrs = {'class':'summary-view-icon'})
             data = lista_data[0].text.strip()
             horario = lista_data[1].text.strip()
@@ -56,26 +54,25 @@ def extrair_infos():
                 #print(horario)
                 #print(lista_texto_paragrafo)
                 #print('-' * 50)
-    return titulo, link, numero, data, horario, lista_texto_paragrafo               
-            
+            criar_db(titulo, link, numero, data, horario, lista_texto_paragrafo)               
+        
 
-def criar_db(infos):
+def criar_db(titulo, link, numero, data, horario, lista_texto_paragrafo):
     db = TinyDB('db.json', indent=4, ensure_ascii = False)
-    for info in infos:
-        db.insert({
-            'Titulo da materia': titulo,
-            'Link da materia': link,
-            'Numero da nota de imprensa': numero,
-            'Data da materia': data,
-            'Horario da materia': horario,
-            'Conteudo da materia': lista_texto_paragrafo,
-        }) 
+    db.insert({
+        'Titulo da materia': titulo,
+        'Link da materia': link,
+        'Numero da nota de imprensa': numero,
+        'Data da materia': data,
+        'Horario da materia': horario,
+        'Conteudo da materia': lista_texto_paragrafo,
+    })
 
 def main():
-    url = "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa"
-    extrair_infos()
-    infos = extrair_infos()
-    criar_db(infos)
+    lista_urls = construir_url()
+    infos = extrair_infos(lista_urls)
+    
+    
     
 if __name__ == "__main__":
     main()
