@@ -4,3 +4,6 @@ channels:
   - defaults
 dependencies:
   - python
+  - requests
+  - beautifulsoup4
+  - tinydb

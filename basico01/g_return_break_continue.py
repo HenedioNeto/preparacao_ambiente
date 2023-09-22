@@ -5,14 +5,13 @@
 import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB, Query
+import re 
 
 def acessar_pagina(url):
     pagina = requests.get(url)
     bs = BeautifulSoup(pagina.text, "html.parser")
     #print(bs)
     return bs
-
-db = TinyDB('db.json')
 
 def construir_url():
     list_url = []
@@ -39,6 +38,7 @@ def extrair_infos():
             numero = nota_imprensa.span.text
             numero = numero.split()
             numero = numero[4]
+            #numero = re.findall(r'\d+', numero)
             lista_data = nota_imprensa.find_all('span', attrs = {'class':'summary-view-icon'})
             data = lista_data[0].text.strip()
             horario = lista_data[1].text.strip()
@@ -49,29 +49,33 @@ def extrair_infos():
             for paragrafo in lista_paragrafo:
                 texto_paragrafo = paragrafo.text
                 lista_texto_paragrafo.append(texto_paragrafo)
-            db.insert({
-                'Titulo da materia': titulo,
-                'Link da materia': link,
-                'Numero da nota de imprensa': numero,
-                'Data da materia': data,
-                'Horario da materia': horario,
-                'Conteudo da materia': lista_texto_paragrafo,
-            })                
-            #print(titulo)
-            #print(link)
-            #print(numero)
-            #print(data)
-            #print(horario)
-            #print(lista_texto_paragrafo)
-            #print('-' * 50)
+                #print(titulo)
+                #print(link)
+                #print(numero)
+                #print(data)
+                #print(horario)
+                #print(lista_texto_paragrafo)
+                #print('-' * 50)
+    return titulo, link, numero, data, horario, lista_texto_paragrafo               
+            
 
+def criar_db(infos):
+    db = TinyDB('db.json', indent=4, ensure_ascii = False)
+    for info in infos:
+        db.insert({
+            'Titulo da materia': titulo,
+            'Link da materia': link,
+            'Numero da nota de imprensa': numero,
+            'Data da materia': data,
+            'Horario da materia': horario,
+            'Conteudo da materia': lista_texto_paragrafo,
+        }) 
 
 def main():
     url = "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa"
-    #pagina_web = acessar_pagina(url)
-    #construir_url()
     extrair_infos()
+    infos = extrair_infos()
+    criar_db(infos)
     
-
 if __name__ == "__main__":
     main()
