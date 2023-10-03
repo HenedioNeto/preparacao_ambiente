@@ -54,7 +54,7 @@ def extrair_infos(lista_urls):
             print(data)
             print(horario)
             print(lista_texto_paragrafo)
-            #print('-' * 50)
+            print('-' * 50)
         
 def main():
     construir_url()
