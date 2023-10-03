@@ -28,12 +28,17 @@ def extrair_infos(lista_urls):
             titulo = nota_imprensa.h2.text.strip()
             link = nota_imprensa.a['href'].strip()           
             teste = acessar_pagina(link)
-            tag = 
+            tag = teste.find('p', attrs = {'property':'rnews:alternativeHeadline'})
+            tag = tag.text.strip()
+            print(tag)
+            categoria = teste.find('div', attrs = {'class':'contenttree-widget relationchoice-field'})
+            categoria = categoria.text.strip()
+            print(categoria)
             atualizacao = teste.find('span', attrs = {'class':'documentModified'})
             if atualizacao != None:
                 atualizacao = atualizacao.text.strip()
                 atualizacao = re.findall(r'(\d{2}/\d{2}/\d{4} \d{2}h\d{2})', atualizacao)
-            print(atualizacao)
+                print(atualizacao)
             lista_data = teste.find_all('span', attrs = {'class':'value'})
             data_horario = lista_data[0].text.strip()
             data = re.findall(r'\d{2}/\d{2}/\d{4}', data_horario)
@@ -44,12 +49,12 @@ def extrair_infos(lista_urls):
             for paragrafo in lista_paragrafo:
                 texto_paragrafo = paragrafo.text.strip()
                 lista_texto_paragrafo.append(texto_paragrafo)
-            #print(titulo)
-            #print(link)
-            #print(data)
-            #print(horario)
-            #print(lista_texto_paragrafo)
-            #print('-' * 50)
+            print(titulo)
+            print(link)
+            print(data)
+            print(horario)
+            print(lista_texto_paragrafo)
+            print('-' * 50)
         
 def main():
     construir_url()
