@@ -8,7 +8,7 @@ def acessar_pagina(url):
     bs = BeautifulSoup(pagina.text, "html.parser")
     return bs
 
-def construir_url_li(url, num_contador, num_decremento):
+def construir_url_article(url, num_contador, num_decremento):
     list_url = []
     links_notas_de_imprensa = str(url)
     contador = int(num_contador)
@@ -22,18 +22,20 @@ def extrair_infos(lista_urls):
     lista_de_links = lista_urls
     for link_geral in lista_de_links:
         html = acessar_pagina(link_geral)
-        conteudo = html.find('ul', attrs = {'class':'noticias listagem-noticias-com-foto'})
-        lista_nota_imprensa = conteudo.find_all('li')
+        conteudo = html.find('div', attrs = {'id':'content-core'})
+        lista_nota_imprensa = conteudo.find_all('article')
         for nota_imprensa in lista_nota_imprensa:
             titulo = nota_imprensa.h2.text.strip()
             link = nota_imprensa.a['href'].strip()
             teste = acessar_pagina(link)
             tag = teste.find('p', attrs = {'property':'rnews:alternativeHeadline'})
             tag = tag.text.strip()
-            categoria = teste.find('p', attrs = {'property':'rnews:alternativeHeadline'})
-            if categoria != None:
-                categoria = categoria.text.strip()
-            print(categoria)
+            outra_tag = teste.find('div', attrs = {'id':'category'})
+            outra_tag = outra_tag.find_all('a')
+            lista_outra_tag = []
+            for tags in outra_tag:
+                outra_tag = tags.text
+                lista_outra_tag.append(outra_tag)
             atualizacao = teste.find('span', attrs = {'class':'documentModified'})
             if atualizacao != None:
                 atualizacao = atualizacao.text.strip()
@@ -49,14 +51,9 @@ def extrair_infos(lista_urls):
                 texto_paragrafo = paragrafo.text.strip()
                 lista_texto_paragrafo.append(texto_paragrafo)
             print(titulo)
-            print(link)
-            print(data)
-            print(horario)
-            print(lista_texto_paragrafo)
-            print('-' * 50)
 
 def main():
-    construir_url_li()
+    construir_url_article()
 
 if __name__ == "__main__":
     main() 
